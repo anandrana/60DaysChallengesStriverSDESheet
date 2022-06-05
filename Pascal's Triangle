@@ -1,0 +1,20 @@
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+
+public class Solution {
+	public static ArrayList<ArrayList<Long>> printPascal(int n) {
+                 // Write your code here.
+        ArrayList<ArrayList<Long>> ans=new ArrayList<>();
+        for(int line=1;line<=n;line++){
+            Long c=1l;
+            ArrayList<Long> temp=new ArrayList<>();
+            for(int i=1;i<=line;i++){
+                temp.add(c);
+                c=c*(line-i)/i;
+            }
+            ans.add(temp);
+        }
+        return ans;
+	}
+}
