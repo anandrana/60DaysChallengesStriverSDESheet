@@ -1,0 +1,33 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+def nextPermutation(p, n):
+    # Write your code here.
+    # Return a list.
+    flag=0
+    for i in range(n-2,-1,-1):
+        if(p[i+1]<p[i]):
+            continue
+        else:
+            index=i
+            flag=1
+            break
+    if(flag==0):
+        temp=p[:]
+        temp.reverse()
+        return temp
+    
+    for i in range(n-1,-1,-1):
+        if(p[i]>p[index]):
+            last=i
+            break
+    p[index],p[last]=p[last],p[index]
+    first=index+1
+    temp=p[first:]
+    temp.reverse()
+    ans=p[:first]+temp[:]
+    return ans
+            
+            
