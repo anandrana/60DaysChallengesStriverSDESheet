@@ -1,0 +1,27 @@
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+import java.lang.*;
+public class Solution{
+    public static int maximumProfit(ArrayList<Integer> prices){
+        // Write your code here.
+        int n=prices.size();
+        int[] left=new int[n];
+        int[] right=new int[n];
+        left[0]=prices.get(0);
+        int Max=0;
+        right[n-1]=prices.get(prices.size()-1);
+        
+        for(int i=1;i<n;i++){
+            left[i]=Math.min(left[i-1],prices.get(i));
+        }
+        for(int i=n-2;i>=0;i--){
+            right[i]=Math.max(right[i+1],prices.get(i));
+        }
+        
+        for(int i=0;i<n-1;i++){
+            Max=Math.max(Max,right[i+1]-left[i]);
+        }
+        return Max;
+    }
+}
