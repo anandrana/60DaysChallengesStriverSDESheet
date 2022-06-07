@@ -1,0 +1,60 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+from sys import stdin,setrecursionlimit
+
+class Solution:
+    def __init__ (self, start, end):
+        self.start = start
+        self.end = end
+
+def mergeIntervals(intervals):
+    # Write your code here.
+#     print(intervals)
+    temp=[]
+    for ele in intervals:
+        temp.append([ele.start,ele.end])
+#     print(temp)
+    temp=sorted(temp,key=lambda x:(x[0],x[1]))
+#     print(temp)
+
+    start=temp[0][0]
+    end=temp[0][1]
+    flag=0
+    ans=[]
+    for ele in temp[1:]:
+        if(ele[0]<=end):
+            if(ele[1]>=end):
+                end=ele[1]
+            flag=0
+        else:
+            a=Solution(start,end)
+            ans.append(a)
+            start=ele[0]
+            end=ele[1]
+            flag=1
+    
+    a=Solution(start,end)
+    ans.append(a)
+    
+#     print(ans)           
+    return ans
+
+    
+
+n = int(input())
+arr1 = list(map(int, stdin.readline().strip().split(" ")))
+arr2 = list(map(int, stdin.readline().strip().split(" ")))
+arr1.sort()
+arr2.sort()
+intervals = []
+for i in range(n):
+    a = Solution(arr1[i], arr2[i])
+    intervals.append(a)
+
+res = mergeIntervals(intervals)
+
+for i in range(len(res)):
+    print(res[i].start, res[i].end)
