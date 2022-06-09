@@ -1,0 +1,35 @@
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+
+public class Solution {
+	static boolean findTargetInMatrix(ArrayList<ArrayList<Integer>> mat, int n, int m, int target) {
+		// Write your code here.
+        int count=0,flag=0;
+        for(ArrayList<Integer> temp:mat){
+            if(temp.get(m-1)<target){
+                count++;
+            }else{
+                flag=1;
+                break;
+            }
+        }
+        if(flag==0){
+            return false;
+        }
+        ArrayList<Integer> temp=mat.get(count);
+        int l=0;
+        int h=m-1;
+        while(l<=h){
+            int mid=(l+h)/2;
+            if(temp.get(mid)==target){
+                return true;
+            }else if(temp.get(mid)>target){
+                h=mid-1;
+            }else{
+                l=mid+1;
+            }
+        }
+        return false;
+	}
+}
