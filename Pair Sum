@@ -1,0 +1,28 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+from collections import Counter
+
+def pairSum(arr, target):
+    # Write your code here.
+    dic=dict(Counter(arr))
+    ans=[]
+    s=set()
+    
+    for k,v in dic.items():
+        temp=target-k
+        if(temp in dic):
+            if(temp==k and temp not in s):
+                c=(v*(v-1))//2
+                tempList=[[min(k,temp),max(k,temp)]]*c
+                ans.extend(tempList)
+                s.add(temp)
+            elif(temp not in s):
+                c=(dic[temp]*v)
+                tempList=[[min(k,temp),max(k,temp)]]*c
+                ans.extend(tempList)
+                s.add(temp)
+                s.add(k)
+    ans=sorted(ans,key=lambda x:x[0])
+    return ans
