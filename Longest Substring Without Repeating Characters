@@ -1,0 +1,27 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution 
+{
+	public static int uniqueSubstrings(String input) 
+    {
+		//write your code here
+        Map<Character,Integer> hm=new HashMap<>();
+        int Max=0;
+        int start=0;
+        int i;
+        for(i=0;i<input.length();i++){
+            char temp=input.charAt(i);
+            if(hm.containsKey(temp)){
+                int t=i-start;
+                Max=Math.max(t,Max);
+                start=Math.max(hm.get(temp)+1,start);
+                hm.put(temp,i);
+            }else{
+                hm.put(temp,i);
+            }
+//             System.out.println(hm + " "+ start);
+        }
+        Max=Math.max(Max,i-start);
+        return Max;
+	}
+}
