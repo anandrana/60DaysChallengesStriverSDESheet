@@ -1,0 +1,39 @@
+import java.util.* ;
+import java.io.*; 
+/************************************************************
+
+    Following is the linked list node structure:
+    
+    class LinkedListNode<T> {
+        T data;
+        LinkedListNode<T> next;
+
+        public LinkedListNode(T data) {
+            this.data = data;
+        }
+    }
+
+************************************************************/
+
+public class Solution {
+    public static LinkedListNode<Integer> merge(LinkedListNode<Integer> h1,LinkedListNode<Integer> h2){
+        if(h1==null){
+            return h2;
+        }
+        if(h2==null){
+            return h1;
+        }
+        if(h1.data>=h2.data){
+            h2.next=merge(h1,h2.next);
+            return h2;
+        }else{
+            h1.next=merge(h1.next,h2);
+            return h1;
+        }
+    }
+	public static LinkedListNode<Integer> sortTwoLists(LinkedListNode<Integer> first, LinkedListNode<Integer> second) {
+		// Write your code here.
+        
+        return merge(first,second);
+	}
+}
