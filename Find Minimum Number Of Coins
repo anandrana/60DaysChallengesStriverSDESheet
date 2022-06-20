@@ -1,0 +1,17 @@
+import bisect
+
+denominations = [1, 2, 5, 10, 20, 50, 100, 500, 1000]
+
+
+def findMinimumCoins(amount):
+
+	# Write your code here
+    count=0
+    while(amount > 0):
+        index=bisect.bisect_right(denominations,amount)
+        temp=amount//denominations[index-1]
+        r=amount%denominations[index-1]
+        amount=r
+        count+=temp
+        
+    return count
