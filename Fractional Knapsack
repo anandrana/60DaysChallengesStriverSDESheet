@@ -1,0 +1,32 @@
+def maximumValue(items, n, w):
+
+	# Write your code here.
+	# ITEMS contains [weight, value] pairs.
+    temp=[]
+    for i in range(n):
+        if(items[i][1]!=0):
+            a=items[i][0]/items[i][1]
+            f="{:.4f}".format(a)
+            temp.append((float(f),items[i][0],items[i][1]))
+    temp.sort()
+#     print(temp)
+    weight=0
+    value=0
+    for i in range(n):
+        weight=temp[i][1]
+        if(w>=weight):
+            w-=weight
+            value+=temp[i][2]
+            if(w==0):
+                break
+        else:
+            t=(w/weight)*temp[i][2]
+#             print(t)
+            value+=t
+            break;
+#         print(value)
+    
+    ans="{:.2f}".format(value)
+    return float(ans)
+#     print(temp)
+    
