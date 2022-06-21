@@ -1,0 +1,20 @@
+def combinationSum2(arr, n, target):
+    # write your code here
+    res = []
+    def backtrack(i, s, tmp):
+        if s == target:
+            res.append(tmp[:])
+            return 
+        if i == n or s > target:
+            return
+
+        for j in range(i, n):
+            if j > i and arr[j] == arr[j-1]:
+                continue
+            tmp.append(arr[j])
+            backtrack(j+1, s + arr[j], tmp)
+            tmp.pop()
+            
+    arr.sort()
+    backtrack(0, 0, [])
+    return res 
