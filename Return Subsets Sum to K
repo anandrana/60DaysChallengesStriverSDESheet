@@ -1,0 +1,15 @@
+import math
+def findSubsetsThatSumToK(arr, n, k) :
+    # Write your code here.
+    m=int(math.pow(2,n))
+    ans=[]
+    for counter in range(m):
+        temp=[]
+        for i in range(n):
+            if(counter & (1<<i)):
+                temp+=[arr[i]]
+        if(sum(temp)==k):
+            ans.append(temp)
+    return ans
+            
+            
