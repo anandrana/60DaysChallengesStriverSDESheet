@@ -1,0 +1,51 @@
+public class Solution {
+
+    public static boolean isSafe(int[][] matrix,int row,int col,int ch){
+        for(int i=0;i<matrix.length;i++){
+            if(matrix[i][col]==ch){
+                return false;
+            }
+        }
+        
+        for(int i=0;i<matrix[0].length;i++){
+            if(matrix[row][i]==ch){
+                return false;
+            }
+        }
+        
+        int rowGroup=(row/3)*3;
+        int colGroup=(col/3)*3;
+        
+        for(int i=rowGroup;i<rowGroup+3;i++){
+            for(int j=colGroup;j<colGroup+3;j++){
+                if(matrix[i][j]==ch){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+	public static boolean isItSudoku(int matrix[][]) {
+
+		// Write your code here.
+       for(int i=0;i<9;i++){
+           for(int j=0;j<9;j++){
+               if(matrix[i][j]==0){
+                   for(int ch=1;ch<=9;ch++){
+                       if(isSafe(matrix,i,j,ch)){
+                           matrix[i][j]=ch;
+                           if(isItSudoku(matrix)){
+                               return true;
+                           }else
+                               matrix[i][j]=0;
+                       }
+                   }
+                   return false;
+               }
+           }
+       }
+        return true;
+        
+	}
+}
