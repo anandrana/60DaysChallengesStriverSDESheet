@@ -1,0 +1,54 @@
+import java.util.*;
+
+
+public class Solution {
+    static ArrayList<ArrayList<Integer>> ans;
+    public static boolean isSafe(int[][] temp,int row,int col){
+        int i,j;
+        for(i=0;i<col;i++){
+            if(temp[row][i] == 1){
+                return false;
+            }
+        }
+        
+        for(i=row,j=col;i>=0 && j>=0; i--,j--){
+            if(temp[i][j]==1){
+                return false;
+            }
+        }
+        for(i=row,j=col;i<temp.length && j>=0;i++,j--){
+            if(temp[i][j] == 1){
+                return false;
+            }
+        }
+        return true;
+        
+    }
+    public static void solve(int n,int col,int[][] temp){
+        if(col==n){
+            ArrayList<Integer> tempList=new ArrayList<>();
+            for(int i=0;i<n;i++){
+                for(int j=0;j<n;j++){
+                    tempList.add(temp[i][j]);
+                }
+            }
+            ans.add(new ArrayList<>(tempList));
+    
+        }
+        for(int i=0;i<n;i++){
+            if(isSafe(temp,i,col)){
+                temp[i][col]=1;
+                solve(n,col+1,temp);
+                temp[i][col]=0;
+            }
+        }
+    }
+    public static ArrayList<ArrayList<Integer>> solveNQueens(int n) {
+        // Write your code here.
+        ans=new ArrayList<>();
+        int[][] temp=new int[n][n]; 
+        
+        solve(n,0,temp);
+        return ans;
+    }
+}
