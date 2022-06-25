@@ -1,0 +1,5 @@
+def findNthRootOfM(n,m):
+    # Write your Code here.
+    ans=m**(1/n)
+    result="{:.6f}".format((ans))
+    return result
