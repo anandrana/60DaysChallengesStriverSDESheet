@@ -1,0 +1,45 @@
+public class Solution {
+    public static int ninjaAndLadoos(int a[], int b[], int m, int n, int k) {
+        
+            int i=0,j=0,count=0,temp;
+            int t=k;
+            while(i<m && j<n){
+                if(a[i]<b[j]){
+                    temp=a[i];
+                    i++;
+                    
+                }
+                else{
+                    temp=b[j];
+                    j++;
+                    
+                }
+                count++;
+                
+                if(count==k){
+                    return temp;
+                }
+            }
+//              System.out.println(count);
+            while(i<m){
+                temp=a[i];
+                i++;
+                count++;
+                
+                if(count==t){
+                    return temp;
+                }
+            }
+            
+            while(j<n){
+                temp=b[j];
+             
+                count++;
+                j++;
+                if(count==t){
+                    return temp;
+                }
+            }
+          return 0;
+    }
+}
