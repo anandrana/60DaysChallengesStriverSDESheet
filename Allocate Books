@@ -1,0 +1,42 @@
+public class Solution {
+    public static boolean isPossible(int[] time,long mid,int m,int n){
+        int count=0;
+        long temp=0;
+        for(int i=0;i<m;i++){
+            temp+=time[i];
+            if(temp>mid){
+                count++;
+                temp=time[i];
+                if(temp>mid){
+                    return false;
+                }
+            }
+        }
+        if(count<n){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public static long ayushGivesNinjatest(int n, int m, int[] time) {
+        // Write your code here.
+        
+        long low=time[0];
+        long high=0;
+        for(int i=0;i<m;i++){
+            high+=time[i];
+            low=Math.min(low,time[i]);
+        }
+        long ans=-1;
+        while(low<=high){
+            long mid=(low+high)/2;
+            if(isPossible(time,mid,m,n)){
+                high=mid-1;
+                ans=mid;
+            }else{
+                low=mid+1;
+            }
+        }
+        return ans;
+    }
+}
