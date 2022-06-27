@@ -1,0 +1,40 @@
+import java.util.*;
+
+public class Solution {
+
+    public static boolean isPossible(int[] positions,int c,int mid){
+        int cnt=1;
+        int prevPlace=positions[0];
+        for(int i=1;i<positions.length;i++){
+            if(positions[i]-prevPlace >= mid){
+                cnt++;
+                prevPlace=positions[i];
+            }     
+        }
+        if(cnt>=c){
+            return true;
+        }
+        return false;
+    }
+    public static int chessTournament(int[] positions, int n,  int c) 
+	{
+        // Write your code here.
+        
+        Arrays.sort(positions);
+        int l=1;
+        int h=positions[n-1]-positions[0];
+        
+        
+        while(l<=h){
+            int mid=(l+h)/2;
+            if(isPossible(positions,c,mid)){
+                l=mid+1;
+            }else{
+                h=mid-1;
+            }
+        }
+        return h;
+        
+    }
+
+}
