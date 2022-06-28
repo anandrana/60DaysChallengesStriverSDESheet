@@ -1,0 +1,9 @@
+import heapq
+
+def kthSmallLarge(arr, n, k):
+    # Write your code here
+    arr.sort()
+    temp=[]
+    temp.append(arr[k-1])
+    temp.append(arr[n-k])
+    return temp
