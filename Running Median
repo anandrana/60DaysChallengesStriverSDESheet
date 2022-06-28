@@ -1,0 +1,16 @@
+import bisect
+def findMedian(arr, n):
+    # Write your code here
+    temp=[]
+    for i in range(n):
+        index=bisect.bisect_left(temp,arr[i])
+        bisect.insort(temp,arr[i])
+#         print(temp)
+        if(len(temp)%2==0):
+            t=len(temp)//2
+            arr[i]=(temp[t]+temp[t-1])//2
+        else:
+            t=len(temp)//2
+            arr[i]=temp[t]
+    print(*arr)
+     
