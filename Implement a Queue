@@ -1,0 +1,40 @@
+class Queue :
+#     temp=[]
+    #Define data members and __init__()
+    
+    def __init__(self):
+        self.temp=[]
+
+
+
+    '''----------------- Public Functions of Queue -----------------'''
+    def isEmpty(self) :
+        if(len(self.temp)==0):
+            return True
+        else:
+            return False
+        #Implement the isEmpty() function
+
+
+
+    def enqueue(self, data) :
+        self.temp.append(data)
+        #Implement the enqueue(element) function
+
+
+
+    def dequeue(self) :
+        if(len(self.temp)!=0):
+            return self.temp.pop(0)
+        else:
+            return -1
+        #Implement the dequeue() function
+
+
+
+    def front(self) :
+        if(len(self.temp)==0):
+            return -1
+        else:
+            return self.temp[0]
+        #Implement the front() function
