@@ -1,0 +1,27 @@
+import java.util.*;
+
+public class Solution {
+
+    public static void insert(Stack<Integer> stack,int temp){
+        if(stack.empty() || (stack.peek()<temp && !stack.empty())){
+            stack.push(temp);
+            return ;
+        }
+        int v=stack.peek();
+        stack.pop();
+        insert(stack,temp);
+        stack.push(v);
+    }
+	public static void sortStack(Stack<Integer> stack) {
+		// Write your code here.
+        if(stack.empty()){
+            return;
+        }
+        int val=stack.peek();
+        stack.pop();
+        sortStack(stack);
+        insert(stack,val);
+        
+	}
+
+}
