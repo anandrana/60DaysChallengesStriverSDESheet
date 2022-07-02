@@ -1,0 +1,33 @@
+def slidingWindowMaximum(nums:list, k:int):
+	# Write your code here
+	# Return a list
+    if(k==1):
+        return nums
+    ans=[]
+    temp=[]
+    for i in range(k):
+        if(len(temp)==0):
+            temp.append((nums[i],i))
+        else:
+            if(nums[i]<temp[-1][0]):
+                temp.append((nums[i],i))
+            else:
+                while(len(temp)>0 and nums[i]>temp[-1][0]):
+                    temp.pop()
+                temp.append((nums[i],i))
+    ans.append(temp[0][0])
+    i=k
+    while(i<len(nums)):
+        t=temp[0][1]
+        if(t>(i-k)):
+            while(len(temp)>0 and nums[i]>temp[-1][0]):
+                temp.pop()
+            temp.append((nums[i],i))
+            ans.append(temp[0][0])
+            i+=1
+        else:
+            temp.pop(0)
+    return ans
+            
+                
+            
