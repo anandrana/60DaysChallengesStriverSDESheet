@@ -1,0 +1,14 @@
+def findSpans(price):
+    # Write your code here.
+    ans=[1]*len(price)
+    stack=[]
+    for i in range(len(price)):
+        cnt=1
+        if(len(stack)!=0 and price[i]>=price[stack[-1]]):
+            while(len(stack)!=0 and price[i]>=price[stack[-1]]):
+                cnt+=ans[stack[-1]]
+                stack.pop()
+        stack.append(i)
+        ans[i]=cnt
+    return ans
+        
