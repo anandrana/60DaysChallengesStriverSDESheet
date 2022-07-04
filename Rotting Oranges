@@ -1,0 +1,44 @@
+def minTimeToRot(grid, n, m):
+
+    # Write your code here.
+    q=[]
+    cnt_nonZero=0
+    for i in range(n):
+        for j in range(m):
+            if(grid[i][j]==2):
+                q.append((i,j))
+            
+            if(grid[i][j]!=0):
+                cnt_nonZero+=1
+    if(cnt_nonZero==0):
+        return 0
+    row=[-1,0,1,0]
+    col=[0,1,0,-1]
+    ans=0
+#     print(q)
+    cnt=0
+    while(len(q)>0):
+        l=len(q)
+        
+        cnt+=l
+        for i in range(l):
+            temp=q.pop(0)
+            for j in range(4):
+                x=temp[0]+row[j]
+                y=temp[1]+col[j]
+                
+                if(x<0 or y<0 or x>=n or y>=m or grid[x][y]==2 or grid[x][y]==0):
+                    continue
+                
+                grid[x][y]=2
+                q.append((x,y))
+    
+        if(len(q)!=0):
+            ans+=1
+#     print(cnt,cnt_nonZero)
+    
+    if(cnt==cnt_nonZero):
+        return ans
+    else:
+        return -1
+    
