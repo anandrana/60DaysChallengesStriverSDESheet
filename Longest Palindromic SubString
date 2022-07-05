@@ -1,0 +1,30 @@
+def longestPalinSubstring(str):
+
+    def lps(i,j,maxLen,ans):
+        while(i>=0 and j<len(str) and str[i]==str[j]):
+            i-=1
+            j+=1
+        if(j-i-1 > maxLen):
+            maxLen=j-i-1
+            ans=str[i+1:j]
+
+        return ans
+
+    # Write your code here.
+    ans=str[0]
+    maxLen=1
+    n=len(str)
+    for i in range(n):
+        t1=lps(i,i,maxLen,ans)
+        t2=lps(i,i+1,maxLen,ans)
+        
+        if(len(t1)>len(t2) and len(t1)>maxLen):
+            ans=t1[:]
+        elif(len(t2)>len(t1) and len(t2)>maxLen):
+            ans=t2[:]
+        elif(len(t1)==len(t2) and len(t1)>maxLen):
+            ans=t1[:]
+        maxLen=len(ans)
+#         print(t1,t2,maxLen,ans)
+    return ans
+        
