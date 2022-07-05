@@ -1,0 +1,24 @@
+def romanToInt(s):
+        dic={"I":1,"V":5,"X":10,"L":50,"C":100,"D":500,"M":1000}
+        
+        total=0
+        n=len(s)
+        for i in range(n):
+            if(s[i]=='C' or s[i]=='L'):
+                if(i>0 and s[i-1]=='X'):
+                    total+=(dic[s[i]]-2*dic[s[i-1]])
+                else:
+                    total+=dic[s[i]]
+            elif(s[i]=='D' or s[i]=='M'):
+                if(i>0 and s[i-1]=='C'):
+                    total+=(dic[s[i]]-2*dic[s[i-1]])
+                else:
+                    total+=dic[s[i]]
+            elif(s[i]=='V' or s[i]=='X'):
+                if(i>0 and s[i-1]=='I'):
+                    total+=(dic[s[i]]-2*dic[s[i-1]])
+                else:
+                    total+=dic[s[i]]
+            else:
+                total+=dic[s[i]]
+        return total    
