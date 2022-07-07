@@ -1,0 +1,11 @@
+from collections import Counter
+def areAnagram(str1, str2):
+    # Write your code here.
+    if(len(str1)!=len(str2)):
+        return 0
+    
+    dic1=dict(Counter(str1))
+    dic2=dict(Counter(str2))
+    if(dic1==dic2):
+        return 1
+    return 0
