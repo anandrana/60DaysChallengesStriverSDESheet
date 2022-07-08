@@ -1,0 +1,52 @@
+/*********************************************
+
+    class BinaryTreeNode {
+        int val;
+        BinaryTreeNode left;
+        BinaryTreeNode right;
+
+        BinaryTreeNode(int val) {
+            this.val = val;
+            this.left = null;
+            this.right = null;
+        }
+    }
+
+*********************************************/
+import java.util.*;
+
+class Pair{
+	BinaryTreeNode node;
+	int dis;
+	public Pair(BinaryTreeNode node,int dis){
+		this.node=node;
+		this.dis=dis;
+	}
+}
+
+public class Solution {
+    public static ArrayList<Integer> bottomView(BinaryTreeNode root) {
+         // Write your code here.  
+		Map<Integer,Integer> hm=new TreeMap<>();
+		Queue<Pair> q=new LinkedList<>();
+		q.add(new Pair(root,0));
+		while(q.size()>0){
+			Pair p=q.remove();
+			BinaryTreeNode tempNode=p.node;
+			int tempDis=p.dis;
+			
+			hm.put(tempDis,tempNode.val);
+			if(tempNode.left!=null){
+				q.add(new Pair(tempNode.left,tempDis-1));
+			}
+			if(tempNode.right!=null){
+				q.add(new Pair(tempNode.right,tempDis+1));
+			}
+		}
+		ArrayList<Integer> ans=new ArrayList<>();
+		for(Map.Entry<Integer,Integer> entry:hm.entrySet()){
+			ans.add(entry.getValue());
+		}
+		return ans;
+    }
+}
