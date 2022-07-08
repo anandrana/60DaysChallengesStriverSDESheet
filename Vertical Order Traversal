@@ -1,0 +1,31 @@
+'''
+# Binary tree node class for reference
+class BinaryTreeNode:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+'''
+from collections import defaultdict
+
+def verticalOrderTraversal(root):
+	# Write your code here
+	# Return a list
+    
+    dic=defaultdict(list)
+    q=[(root,0)]
+    while(q):
+        node,dis=q.pop(0)
+        dic[dis].append(node.data)
+        if(node.left!=None):
+            q.append((node.left,dis-1))
+        
+        if(node.right!=None):
+            q.append((node.right,dis+1))
+    ans=[]
+#     print(dic)
+    
+    dic=sorted(dic.items())
+    for k,v in dic[:]:
+        ans.extend(v)
+    return ans
