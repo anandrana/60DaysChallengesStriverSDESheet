@@ -1,0 +1,26 @@
+def minCharsforPalindrome(str):
+
+    # Write your code here
+    t=str[::-1]
+    temp=str+"$"+t
+#     print(temp)
+    
+    l=0
+    i=1
+    n=len(temp)
+    lps=[0]*n
+    while(i<n):
+        if(temp[i]==temp[l]):
+            l+=1
+            lps[i]=l
+            i+=1
+        else:
+            if(l>0):
+                l=lps[l-1]
+            else:
+                lps[i]=0
+                i+=1
+    return (len(str)-lps[-1])
+
+            
+        
