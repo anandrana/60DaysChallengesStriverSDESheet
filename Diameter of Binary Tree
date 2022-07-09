@@ -1,0 +1,23 @@
+
+# Binary tree node class for reference
+class BinaryTreeNode:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def diameterOfBinaryTreeUtil(root,ans):
+    if(root==None):
+        return 0
+    leftHeight=diameterOfBinaryTreeUtil(root.left,ans)
+    rightHeight=diameterOfBinaryTreeUtil(root.right,ans)
+    
+    ans[0]=max(ans[0],1+leftHeight+rightHeight)
+    return 1+max(leftHeight,rightHeight)
+
+def diameterOfBinaryTree(root):
+	# Write your code here
+	# Return the root of the tree
+    ans=[-999999999]
+    diameterOfBinaryTreeUtil(root,ans)
+    return ans[0]-1
