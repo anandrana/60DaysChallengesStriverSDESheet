@@ -1,0 +1,45 @@
+/*************************************************************
+
+Following is the Binary Tree node structure
+
+class BinaryTreeNode<T> 
+{
+    T data;
+    BinaryTreeNode<T> left;
+    BinaryTreeNode<T> right;
+
+    BinaryTreeNode(T data) {
+        this.data = data;
+        left = null;
+        right = null;
+    }
+};
+
+*************************************************************/
+public class Solution {
+
+    public static int isBalancedBTUtil(BinaryTreeNode<Integer> root){
+        if(root==null){
+            return 0;
+        }
+        int leftHeight=isBalancedBTUtil(root.left);
+        if(leftHeight==-1)
+            return -1;
+        int rightHeight=isBalancedBTUtil(root.right);
+        if(rightHeight==-1)
+            return -1;
+        if(Math.abs(leftHeight-rightHeight)>1){
+            return -1;
+        }
+        return 1+Math.max(leftHeight,rightHeight);
+    }
+	public static boolean isBalancedBT(BinaryTreeNode<Integer> root) {
+		// Write your code here.
+        if(root==null){
+            return true;
+        }
+        if(isBalancedBTUtil(root)==-1){
+            return false;
+        }return true;
+	}
+}
