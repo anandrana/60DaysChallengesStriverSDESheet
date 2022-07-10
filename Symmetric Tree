@@ -1,0 +1,21 @@
+'''
+
+    Following is the representation for the Binary Tree Node:
+
+    class BinaryTreeNode :
+    def __init__(self, data) :
+        self.data = data
+        self.left = None
+        self.right = None
+'''
+
+def isSymmetricUtil(root1,root2):
+    if(root1==None and root2==None):
+        return True
+    if(root1==None or root2==None):
+        return False
+    return ((root1.data==root2.data) and isSymmetricUtil(root1.left,root2.right) and isSymmetricUtil(root1.right,root2.left))
+def isSymmetric(root) :
+    # Write your code here.
+    return isSymmetricUtil(root,root)
+    
