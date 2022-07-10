@@ -1,0 +1,112 @@
+from sys import stdin, setrecursionlimit
+from queue import Queue
+setrecursionlimit(10**7)
+
+
+# Binary tree node class for reference.
+
+class BinaryTreeNode:
+    def __init__(self, data):
+        self.val = data
+        self.left = None
+        self.right = None
+        
+
+def findMaxSumPathUtil(root,ans,count):
+    
+    if(root==None):
+        return 0
+    if(root.left==None and root.right==None):
+        count[0]+=1
+    left=findMaxSumPathUtil(root.left,ans,count)
+    right=findMaxSumPathUtil(root.right,ans,count)
+    ans[0]=max(ans[0],left+right+root.val)
+    return root.val+max(left,right)
+
+def findMaxSumPath(root):
+    
+    # Write your code here.
+    ans=[-1]
+    count=[0]
+    findMaxSumPathUtil(root,ans,count)
+#     print(count[0])
+    if(count[0]<2):
+        return -1
+    return ans[0]
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Taking level-order input using fast I/O method.
+def takeInput():
+    levelOrder = list(map(int, stdin.readline().strip().split(" ")))
+    start = 0
+
+    length = len(levelOrder)
+
+    if length == 1:
+        return None
+
+    root = BinaryTreeNode(levelOrder[start])
+    start += 1
+
+    q = Queue()
+    q.put(root)
+
+    while not q.empty():
+        currentNode = q.get()
+
+        leftChild = levelOrder[start]
+        start += 1
+
+        if leftChild != -1:
+            leftNode = BinaryTreeNode(leftChild)
+            currentNode.left = leftNode
+            q.put(leftNode)
+
+        rightChild = levelOrder[start]
+        start += 1
+
+        if rightChild != -1:
+            rightNode = BinaryTreeNode(rightChild)
+            currentNode.right = rightNode
+            q.put(rightNode)
+
+    return root
+
+
+# Main.
+t = int(input())
+for i in range(t):
+    root = takeInput()
+    maxSum = findMaxSumPath(root)
+    print(maxSum)
