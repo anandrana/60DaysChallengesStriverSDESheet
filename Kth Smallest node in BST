@@ -1,0 +1,34 @@
+'''
+    Following is the TreeNode class structure
+   
+    class   TreeNode :
+        def __init__(self, data) :
+            self.data = data
+            self.left = None
+            self.right = None
+
+        def __del__(self):
+            if self.left:
+                del self.left
+            if self.right:
+                del self.right
+
+'''
+def kthSmallestElementBST(root,count):
+    if(root==None):
+        return None
+    left=kthSmallestElementBST(root.left,count)
+    if(left!=None):
+        return left
+    count[0]-=1
+    if(count[0]==0):
+        return root
+    return kthSmallestElementBST(root.right,count)
+
+def kthSmallest(root, k):
+    #  Write the code here.
+    count=[k]
+    ans=kthSmallestElementBST(root,count)
+    if(ans==None):
+        return -1
+    return ans.data
