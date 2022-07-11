@@ -1,0 +1,64 @@
+/*
+    ----------------- Binary Tree node class for reference -----------------
+
+    class BinaryTreeNode<T> {
+	    public T data;
+	    public BinaryTreeNode<T> left;
+	    public BinaryTreeNode<T> right;
+	    public BinaryTreeNode<T> next;
+
+	    BinaryTreeNode(T data) {
+	        this.data = data;
+	        left = null;
+	        right = null;
+	        next = null;
+	    }
+	};
+
+*/
+
+public class Solution {
+    public static BinaryTreeNode<Integer> nextPointer(BinaryTreeNode<Integer> root){
+        BinaryTreeNode<Integer> temp=root.next;
+        while(temp!=null){
+            if(temp.left!=null){
+                return temp.left;
+            }
+            if(temp.right!=null){
+                return temp.right;
+            }
+            temp=temp.next;
+        }
+        return null;
+    }
+	public static void connectNodes(BinaryTreeNode<Integer> root) {
+    	// Write your code here.
+        root.next=null;
+        
+        while(root!=null){
+            BinaryTreeNode<Integer> q=root;
+            while(q!=null){
+                if(q.left!=null){
+                    if(q.right!=null){
+                        q.left.next=q.right;
+                    }else{
+                        q.left.next=nextPointer(q);
+                    }
+                }
+                if(q.right!=null){
+                    q.right.next=nextPointer(q);
+                }
+                q=q.next;
+            }
+            if(root.left!=null){
+                root=root.left;
+            }
+            else if(root.right!=null){
+                root=root.right;
+            }else{
+                root=nextPointer(root);
+            }
+        }
+        
+	}
+}
