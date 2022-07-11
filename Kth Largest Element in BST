@@ -1,0 +1,46 @@
+/*************************************************************
+    Following is the Binary Search Tree node structure
+
+	class TreeNode<T> {
+	    public T data;
+	    public TreeNode<T> left;
+	    public TreeNode<T> right;
+
+	    TreeNode(T data) {
+	        this.data = data;
+	        left = null;
+	        right = null;
+	    }
+	}
+
+*************************************************************/
+
+import java.util.ArrayList;
+
+public class Solution {
+    public static TreeNode<Integer> KthLargestNumberUtil(TreeNode<Integer> root,int[] k){
+        if(root==null){
+            return null;
+        }
+        TreeNode<Integer> right=KthLargestNumberUtil(root.right,k);
+//         System.out.println(k[0]+" "+ right);
+        if(right!=null){
+            return right;
+        }
+        k[0]--;
+        if(k[0]==0){
+            return root;
+        }
+//         System.out.println(k[0]+" "+ root.data);
+        return KthLargestNumberUtil(root.left,k);
+    }
+	public static int KthLargestNumber(TreeNode<Integer> root, int k) {
+		// Write your code here.
+        TreeNode<Integer> temp=KthLargestNumberUtil(root,new int[]{k});
+        if(temp==null){
+            return -1;
+        }else{
+            return temp.data;
+        }
+	}
+}
