@@ -1,0 +1,30 @@
+
+from typing import List
+
+class TreeNode:
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+
+
+
+def preOrderTree(preOrder: List[int]) -> TreeNode:
+    # Write your code here
+    if(len(preOrder)==0):
+        return None
+    root=TreeNode(preOrder[0])
+    left=[]
+    right=[]
+    for i in range(1,len(preOrder)):
+        if(preOrder[i]<preOrder[0]):
+            left.append(preOrder[i])
+        else:
+            right.append(preOrder[i])
+    
+    root.left=preOrderTree(left)
+    root.right=preOrderTree(right)
+    return root
+
+            
+
