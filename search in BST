@@ -1,0 +1,21 @@
+'''
+    Following is the Binary Tree node structure:
+
+	class BinaryTreeNode :
+	    def __init__(self, data) :
+	        self.data = data
+	        self.left = None
+	        self.right = None
+
+'''
+
+def searchInBST(root, x):
+	# Write your code here.
+    if(root==None):
+        return False
+    if(root.data==x):
+        return True
+    if(root.data>x):
+        return searchInBST(root.left,x)
+    else:
+        return searchInBST(root.right,x)
