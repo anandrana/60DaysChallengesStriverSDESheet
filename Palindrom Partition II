@@ -1,0 +1,39 @@
+from sys import stdin, setrecursionlimit
+import sys
+setrecursionlimit(10**6)
+
+def isPalindrome(s):
+    t=s[::-1]
+    if(t==s):
+        return True
+    return False
+
+def minPalindromPartition(i,s,n,dp):
+    if(i==n):
+        return 0
+    temp=""
+    minCost=float("inf")
+    if(dp[i]!=-1):
+        return dp[i]
+    for j in range(i,n):
+        temp+=s[j]
+        if(isPalindrome(temp)):
+            cost=1+minPalindromPartition(j+1,s,n,dp)
+            minCost=min(minCost,cost)
+    dp[i]=minCost
+    return dp[i]
+def palindromePartitioning(string):
+    # Write your code here.
+    dp=[-1]*len(string)
+    return minPalindromPartition(0,string,len(string),dp)-1
+    
+
+
+# Main
+t = int(input())
+while t:
+    string = list(map(str, input()))
+    while(" " in string):
+        string.remove(" ")
+    print(palindromePartitioning(string))
+    t = t-1
