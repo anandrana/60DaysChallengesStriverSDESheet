@@ -1,0 +1,38 @@
+from sys import stdin
+import sys
+
+def cutRodCost(price,index,n,dp):
+    if(index==0):
+        dp[0][n]=n*price[0]
+        return dp[0][n]
+    if(dp[index][n]!=-1):
+        return dp[index][n]
+    notTaken=cutRodCost(price,index-1,n,dp)
+    taken=float('-inf')
+    rodLength=index+1
+    if(rodLength<=n):
+        taken=price[index]+cutRodCost(price,index,n-rodLength,dp)
+    dp[index][n]=max(notTaken,taken)
+    return dp[index][n]
+
+def cutRod(price, n):
+
+    # Write your code here.
+    dp=[[-1 for i in range(n+1)]for i in range(n)]
+    return cutRodCost(price,n-1,n,dp)
+
+# Taking input using fast I/O.
+def takeInput():
+    n = int(input())
+
+    price = list(map(int, input().strip().split(" ")))
+
+    return price, n
+
+
+# Main.
+t = int(input())
+while t:
+    price, n = takeInput()
+    print(cutRod(price, n))
+    t = t-1
