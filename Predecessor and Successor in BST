@@ -1,0 +1,46 @@
+'''
+    ------- Binary Tree node structure -------
+            class   BinaryTreeNode :
+                def __init__(self, data) :
+                    self.data = data
+                    self.left = None
+                    self.right = None
+
+                def __del__(self):
+                    if self.left:
+                        del self.left
+                    if self.right:
+                        del self.right
+      
+'''
+def findPredecessorNode(root,key):
+    pre=-1
+    while(root):
+        if(root==None):
+            return -1
+        if(root.data>=key):
+            root=root.left
+        else:
+            pre=root.data
+            root=root.right
+    return pre
+
+def findSuccessorNode(root,key):
+    succ=-1
+    while(root):
+        if(root==None):
+            return -1
+        if(root.data>key):
+            succ=root.data
+            root=root.left
+        else:
+            root=root.right
+    return succ
+def predecessorSuccessor(root, key):
+
+	# Write your code here.
+    preNode=findPredecessorNode(root,key)
+    succNode=findSuccessorNode(root,key)
+    return (preNode,succNode)
+
+    
