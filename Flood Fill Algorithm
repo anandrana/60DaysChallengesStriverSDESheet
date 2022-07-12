@@ -1,0 +1,31 @@
+def floodFill(image, x, y, newColor):
+    # Write your Code here.
+    
+    def isSafe(x,y,oldColor,image,visited):
+        n=len(image)
+        m=len(image[0])
+        if(x>=0 and x<n and y>=0 and y<m and image[x][y]==oldColor and (x,y) not in visited):
+            return True
+        return False
+    
+    def floodFillUtil(image,x,y,newColor,oldColor):
+        queue=[(x,y)]
+        rows=[-1,0,1,0]
+        cols=[0,1,0,-1]
+        visited=set((x,y))
+        image[x][y]=newColor
+        while(queue):
+            temp_ele=queue.pop(0)
+            temp_x=temp_ele[0]
+            temp_y=temp_ele[1]
+            
+            for i in range(4):
+                if(isSafe(rows[i]+temp_x,cols[i]+temp_y,oldColor,image,visited)):
+                    queue.append((rows[i]+temp_x,cols[i]+temp_y))
+                    visited.add((rows[i]+temp_x,cols[i]+temp_y))
+                    image[rows[i]+temp_x][cols[i]+temp_y]=newColor
+
+        
+    oldColor=image[x][y]
+    floodFillUtil(image,x,y,newColor,oldColor)
+    return image
