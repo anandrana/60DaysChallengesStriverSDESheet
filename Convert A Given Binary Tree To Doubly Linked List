@@ -1,0 +1,44 @@
+
+/*************************************************************
+ class BinaryTreeNode<T> {
+	T data;
+	BinaryTreeNode<T> left;
+	BinaryTreeNode<T> right;
+
+	public BinaryTreeNode(T data) {
+		this.data = data;
+	}
+}
+
+*************************************************************/
+
+
+public class Solution {
+    static BinaryTreeNode<Integer> prev=null;
+    static BinaryTreeNode<Integer> head=null;
+    
+	public static void BTtoDLLUtil(BinaryTreeNode<Integer> root){
+        if(root==null){
+            return ;
+        }
+        BTtoDLLUtil(root.left);
+        if(prev==null){
+            head=root;
+        }else{
+            root.left=prev;
+            prev.right=root;
+        }
+        prev=root;
+        BTtoDLLUtil(root.right);
+
+        
+    }
+	public static BinaryTreeNode<Integer> BTtoDLL(BinaryTreeNode<Integer> root) {
+		// Write your code here
+        prev=null;
+        head=null;
+        BTtoDLLUtil(root);
+        return head;
+	}
+	
+}
