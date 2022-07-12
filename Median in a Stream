@@ -1,0 +1,29 @@
+import bisect
+
+def findMedian(arr, n):
+
+    # Write your code here
+#     medianList=[]
+    ans=[]
+    for i in range(n):
+        temp=arr[:i]
+
+        if(i==0):
+            ans.append(arr[i])
+        else:
+
+            find_index=bisect.bisect_left(temp,arr[i])
+            temp.insert(find_index,arr[i])
+
+            if(len(temp)%2==0):
+                mid=len(temp)//2
+                median=(temp[mid]+temp[mid-1])//2
+                ans.append(median)
+            else:
+                mid=len(temp)//2
+                ans.append(temp[mid])
+
+        arr=temp[:]+arr[len(temp):]
+
+        
+    return ans
